@@ -1,0 +1,99 @@
+﻿@model Task.Models.LoginModel
+@using Task.Resource
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html dir="@Task.Resource.Resource.dir">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-bg-secondary">
+
+
+        <div>
+            <ul class="navbar-nav">
+
+
+
+
+                <li>
+                    <div>
+
+                        <select id="languageSelect" name="languageSelect" class="form-control">
+                            <option value="">@Resource.Selectlanguage</option>
+                            <option value="@Url.Action("English", "Language")">@Resource.English</option>
+                            <option value="@Url.Action("Arabic", "Language")">@Resource.Arabic</option>
+                        </select>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+        <div class="card mt-5 mx-auto" style="max-width: 400px;">
+            <div class="card-body">
+                <h3 class="card-title text-center">@Resource.Login</h3>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Username, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Enter username" })
+                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-3">@Resource.Login</button>
+            </div>
+        </div>
+    }
+
+
+    <div class="container body-content">
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        document.getElementById('languageSelect').addEventListener('change', function () {
+            var selectedValue = this.value;
+            if (selectedValue) {
+                window.location.href = selectedValue;
+            }
+        });
+    </script>
+</body >
+</html >

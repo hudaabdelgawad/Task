@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Task.Models.Client>
+@using Task.Resource
+@{
+    ViewBag.Title = "Index";
+}
+
+<hr />
+<a href="@Url.Action("Create", "Client")" class="btn btn-primary">
+    <i class="fa fa-plus"></i>@Resource.lbbtnSaveNewClient
+</a>
+
+
+
+<span id="Message" class="d-none">@TempData["Message"]</span>
+
+
+<div class="alert alert-warning @(Model.Any() ? "d-none" : "")">
+    @Resource.mess
+</div>
+
+<table class="table @(!Model.Any() ? "d-none" : "")">
+    <thead>
+        <tr>
+
+            <td> @Html.DisplayNameFor(model => model.FullName)</td>
+            <td> @Html.DisplayNameFor(model => model.Address)</td>
+            <td> @Html.DisplayNameFor(model => model.Phone)</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.FullName)</td>
+                <td> @Html.DisplayFor(modelItem => item.Address)</td>
+
+
+                <td> @Html.DisplayFor(modelItem => item.Phone)</td>
+                <td>
+
+                    <a>
+                        @Html.ActionLink(Resource.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-primary my-4" }) |
+
+                    </a>
+                    <a>
+                        @Html.ActionLink(Resource.Delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger my-4" })
+
+                    </a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Task.Models.Item>
+@using Task.Resource
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<hr />
+<a href="@Url.Action("Create", "Item")" class="btn btn-primary">
+    <i class="fa fa-plus"></i>@Resource.lbbtnSaveNewCategory
+</a>
+
+
+
+<span id="Message" class="d-none">@TempData["Message"]</span>
+
+
+<div class="alert alert-warning @(Model.Any() ? "d-none" : "")">
+    @Resource.mess
+</div>
+
+<table class="table @(!Model.Any() ? "d-none" : "")">
+    <thead>
+        <tr>
+
+            <td> @Html.DisplayNameFor(model => model.Name)</td>
+          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.Name)</td>
+                  <td>
+
+                    <a>
+                        @Html.ActionLink(Resource.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-primary my-4" }) |
+
+                    </a>
+                    <a>
+                        @Html.ActionLink(Resource.Delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger my-4" })
+
+                    </a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

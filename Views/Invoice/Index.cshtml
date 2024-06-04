@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Task.Models.Invoice>
+@using Task.Resource
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<hr />
+<a>
+    @Html.ActionLink(Resource.Createasalesinvoice, "Create", "Invoice", null, new { @class = "btn btn-primary my-4" })
+
+</a>
+
+
+<span id="Message" class="d-none">@TempData["Message"]</span>
+
+
+<div class="alert alert-warning @(Model.Any() ? "d-none" : "")">
+    @Resource.mess
+</div>
+
+<table class="table @(!Model.Any() ? "d-none" : "")">
+    <thead>
+        <tr>
+
+            <td> @Resource.ClientName</td>
+            <td> @Resource.dateinvoice</td>
+            <td>@Resource.NetAmount</td>
+      
+                </tr>
+    </thead>
+    <tbody>
+        @foreach (var invoice in Model)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => invoice.Client.FullName)</td>
+                <td> @Html.DisplayFor(modelItem => invoice.InvoiceDate)</td>
+                <td> @Html.DisplayFor(modelItem => invoice.NetAmount)</td>
+              
+            </tr>
+        }
+    </tbody>
+</table>

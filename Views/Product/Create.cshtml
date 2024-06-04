@@ -1,0 +1,49 @@
+﻿
+@model Task.ViewModels.ProductViewModel
+@using Task.Resource
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h3 class="text-primary">
+    @(@Model.Id == 0 ? @Resource.CreateProduct : @Resource.EditProduct )
+</h3>
+
+<hr />
+
+@using (Html.BeginForm("Save", "Product"))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.Id)
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Name)
+
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+</div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Price, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ItemId)
+        @Html.DropDownListFor(m => m.ItemId, new SelectList(Model.items, "Id", "Name"), @Resource.selectCategory, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ItemId, null, new { @class = "text-danger" })
+    </div>
+
+   
+
+    <button type="submit" class="btn btn-primary mt-3">@Resource.lbbtnSave</button>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
